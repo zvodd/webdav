@@ -1,0 +1,59 @@
+### Server related settings
+address: 0.0.0.0
+port: 0
+auth: true
+# Sets URL prefix for webdav URLs
+prefix: /
+
+### Server tls settings
+
+tls: false
+cert: cert.pem
+key: key.pem
+
+
+### CORS configuration
+cors:
+  enabled: true
+  credentials: true
+  allowed_headers:
+    - Depth
+  allowed_hosts:
+    - http://localhost:8080
+  allowed_methods:
+    - GET
+  exposed_headers:
+    - Content-Length
+    - Content-Range
+
+### Default user settings (will be merged)
+# A relative file path that defines where a user's "root" maps to on the real filesystem
+path: /
+# TODO: Explain this option
+scope: .
+# Allow Write access
+modify: true
+# Rule list
+rules: []
+
+### "Real" user settings
+users:
+  - username: admin
+    password: admin
+    scope: /a/different/path
+    #
+  - username: encrypted
+    password: "{bcrypt}$2y$10$zEP6oofmXFeHaeMfBNLnP.DO8m.H.Mwhd24/TOX2MWLxAExXi4qgi"
+    # use enviroment variable for username and password
+  - username: "{env}ENV_USERNAME"
+    password: "{env}ENV_PASSWORD"
+  - username: basic
+    password: basic
+    modify:   false
+    rules:
+      # TODO: Explain these options
+      - regex: false
+        allow: false
+        path: /some/file
+      - path: /public/access/
+        modify: true

@@ -1,11 +1,12 @@
 [Unit]
 Description=WebDAV server
+Documentation=https://github.com/hacdias/webdav
 After=network.target
 
 [Service]
 Type=simple
-User=root
-ExecStart=/usr/bin/webdav --config /opt/webdav.config
+User=www-data
+ExecStart=/usr/bin/webdav --config /opt/webdav.yaml
 Restart=on-failure
 
 [Install]
